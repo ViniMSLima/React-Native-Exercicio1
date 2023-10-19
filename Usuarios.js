@@ -1,29 +1,20 @@
-import { Text, TextInput, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, Button, TextInput, View, StyleSheet, TouchableOpacity } from "react-native";
 
-export default function Login(props)
+export default function Usuarios(props)
 {
     return (
         <View style={styles.container}>
         
-            <Text style={styles.bigText}>Login</Text>
-            <Text style={styles.smallText}>User:</Text>
-            <TextInput style={styles.inputs}
-            ></TextInput>
-
-            <Text style={styles.smallText}>Password:</Text>
-            <TextInput  style={styles.inputs}
-                secureTextEntry = {true}
-            ></TextInput>
-
-            <TouchableOpacity style={[styles.TouchableOpacity, {backgroundColor: "white", color: "black"}]} 
-            onPress={() => props.navigation.navigate("Usuarios")}><Text>Login</Text></TouchableOpacity>
-
-            <TouchableOpacity style={[styles.TouchableOpacity, {backgroundColor: "lightgrey", color: "white"}]}
-            onPress={() => props.navigation.navigate("Cadastro")}><Text>Cadastro</Text></TouchableOpacity>
-
+            <Text style={styles.bigText}>Usuarios</Text>
+            <View style={{width: "300px", height:"200px", borderRadius: "10px", borderStyle: "dashed", borderWidth: "2px"}}>
+                <Text style={{marginBottom: "5px", marginLeft: "5px", marginTop:"5px"}}>Nome:</Text>
+                <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Idade:</Text>
+                <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Sexo:</Text>
+                <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Receber Notificacao:</Text>
+            </View>
+            
         </View>
     )
-
 }
 
 const styles = StyleSheet.create({
