@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Login from './Login';
 import Cadastro  from './Cadastro';
 import Usuarios from './Usuarios';
+import Logado from './Logado';
 import { UtilsContext } from './Context'
 
 
@@ -31,6 +32,7 @@ export default function App() {
           <Stack.Screen name = "Login" options={{ headerShown: false, title: 'Login'}} component = { Login } />
           <Stack.Screen name = "Cadastro" options={{ headerShown: false}} component = { Cadastro }/>
           <Stack.Screen name = "Usuarios" component = { Usuarios }/>
+          <Stack.Screen name = "Logado" component = { Logado }/>
         </Stack.Navigator>
       </UtilsContext.Provider>
     </NavigationContainer>

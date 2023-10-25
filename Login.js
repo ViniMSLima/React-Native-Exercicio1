@@ -14,6 +14,16 @@ export default function Login(props)
         props.navigation.navigate('Cadastro');
     }
 
+    function login()
+    {
+        {utils.data.map((item) => {
+            if(item.email == email && item.senha == senha)
+            {
+                props.navigation.navigate('Logado'); 
+            }
+        })}
+    }
+    
     return (
         <View style={styles.container}>
         
@@ -29,12 +39,13 @@ export default function Login(props)
             <Text style={styles.smallText}>Password:</Text>
             <TextInput  
                 style={styles.inputs}
+                onChangeText={text => setSenha(text)} 
                 secureTextEntry = {true}
                 placeholder= " password"
             ></TextInput>
 
             <TouchableOpacity 
-                onPress={() => goToCadastro()} 
+                onPress={() => login()} 
                 style={[
                     styles.TouchableOpacity, 
                     {backgroundColor: "white", color: "black"}

@@ -12,21 +12,10 @@ export default function Usuarios(props)
         
             <Text style={styles.bigText}>Usuarios</Text>
             
-            <FlatList
-                data={utils.data}
-                renderItem={
-                    ({item}) => 
-                    <View style={{width: "300px", height:"200px", borderRadius: "10px", borderStyle: "dashed", borderWidth: "2px"}}>
-                        <Text style={{marginBottom: "5px", marginLeft: "5px", marginTop:"5px"}}>Nome: {item.nome} </Text>
-                        <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Idade: {item.idade}</Text>
-                        <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Sexo: {item.sexo}</Text>
-                        <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Email: {item.email}</Text>
-                    </View>
-                }
-                keyExtractor={(item) => item}
-                >
-            </FlatList>
-
+            <View style={{width: "300px", height:"200px", borderRadius: "10px", borderStyle: "dashed", borderWidth: "2px"}}>
+                <Text style={{marginBottom: "5px", marginLeft: "5px", marginTop:"5px"}}> LOGADO!!!</Text>
+            </View>
+                
         </View>
     )
 }
