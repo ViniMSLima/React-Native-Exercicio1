@@ -1,25 +1,67 @@
-import { Text, TextInput, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, TextInput, View, StyleSheet, TouchableOpacity, Button } from "react-native";
+import { UtilsContext } from './Context';
+import { useState, useContext } from 'react';
 
 export default function Login(props)
 {
+    const[ email, setEmail ] = useState("");
+    const[ senha, setSenha ] = useState("");
+    const{ utils, setUtils } = useContext(UtilsContext);
+
+    function goToCadastro()
+    {
+        setUtils({...utils, email: email});
+        props.navigation.navigate('Cadastro');
+    }
+
     return (
         <View style={styles.container}>
         
             <Text style={styles.bigText}>Login</Text>
             <Text style={styles.smallText}>User:</Text>
-            <TextInput style={styles.inputs}
+            <TextInput
+                style={styles.inputs} 
+                onChangeText={text => setEmail(text)} 
+                value={email}
+                placeholder= " email"
             ></TextInput>
 
             <Text style={styles.smallText}>Password:</Text>
-            <TextInput  style={styles.inputs}
+            <TextInput  
+                style={styles.inputs}
                 secureTextEntry = {true}
+                placeholder= " password"
             ></TextInput>
 
-            <TouchableOpacity style={[styles.TouchableOpacity, {backgroundColor: "white", color: "black"}]} 
-            onPress={() => props.navigation.navigate("Usuarios")}><Text>Login</Text></TouchableOpacity>
+            <TouchableOpacity 
+                onPress={() => goToCadastro()} 
+                style={[
+                    styles.TouchableOpacity, 
+                    {backgroundColor: "white", color: "black"}
+                ]}
+            >
+                <Text>Login</Text>
+            </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.TouchableOpacity, {backgroundColor: "lightgrey", color: "white"}]}
-            onPress={() => props.navigation.navigate("Cadastro")}><Text>Cadastro</Text></TouchableOpacity>
+
+            <TouchableOpacity 
+                style={[
+                    styles.TouchableOpacity, {backgroundColor: "lightgrey", color: "white"}
+                ]}
+                onPress={() => props.navigation.navigate("Cadastro")}
+            >
+                <Text>Cadastro</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+                onPress={() => props.navigation.navigate("Usuarios")} 
+                style={[
+                    styles.TouchableOpacity, 
+                    {backgroundColor: "white", color: "black"}
+                ]}
+            >
+                <Text>Usuarios</Text>
+            </TouchableOpacity>
 
         </View>
     )

@@ -1,9 +1,31 @@
 import { Text, Button, TextInput, View, StyleSheet, TouchableOpacity, Image, Switch} from "react-native";
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UtilsContext } from './Context';
 
 export default function Login(props)
 {
-    const [inicio, setInicio] = useState(false)
+    const [ inicio, setInicio ] = useState(false);
+    const { utils, setUtils } = useContext(UtilsContext);
+
+    const [ nome, setNome ] = useState("");
+    const [ idade, setIdade ] = useState("");
+    const [ sexo, setSexo ] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ senha, setSenha ] = useState("");
+
+    let arrayUtils = [];
+
+    function cadastro()
+    {
+        if(utils.data){
+            arrayUtils = [...utils.data];
+        }
+        
+        arrayUtils.push({nome, idade, sexo, email, senha});
+        setUtils({...utils, data:arrayUtils});
+        
+        props.navigation.navigate('Usuarios');
+    }
 
     return (
         <View style={styles.container}>
@@ -11,27 +33,31 @@ export default function Login(props)
             <Image style={{width: "150px", height: "150px", borderRadius: "50%", marginBottom: "30px", marginTop: "30px"}} source={require("./img/1053244.png")}></Image>
 
             <Text style={styles.smallText}>Nome:</Text>
-            <TextInput style={styles.inputs}
+            <TextInput style={styles.inputs} onChangeText={text => setNome(text)}
             ></TextInput>
 
             <View style={{justifyContent: "space-between", display: "flex", flexDirection: "row"}}>
                 <View><Text>Idade:</Text>
-                    <TextInput style={[styles.smallInput, {marginRight: "10px"}]}
+                    <TextInput onChangeText={text => setIdade(text)} style={[styles.smallInput, {marginRight: "10px"}]}
                     ></TextInput>
                 </View>
                 <View>
                     <Text>Sexo:</Text>
-                    <TextInput  style={styles.smallInput}
+                    <TextInput onChangeText={text => setSexo(text)} style={styles.smallInput}
                     ></TextInput>
                 </View>
             </View>
 
             <Text style={styles.smallText}>Email:</Text>
-            <TextInput style={styles.inputs}
+            <TextInput 
+                onChangeText={text => setEmail(text)} 
+                style={styles.inputs}
             ></TextInput>
 
             <Text style={styles.smallText}>Senha:</Text>
-            <TextInput style={styles.inputs}
+            <TextInput 
+                onChangeText={text => setSenha(text)}
+                style={styles.inputs}
                 secureTextEntry = {true}
             ></TextInput>
 
@@ -51,7 +77,7 @@ export default function Login(props)
             </View>
             
             <TouchableOpacity style={[styles.TouchableOpacity, {backgroundColor: "white", color: "black"}]} 
-            onPress={() => props.navigation.navigate("Login")}><Text>Cadastrar</Text></TouchableOpacity>
+            onPress={() => cadastro()}><Text>Cadastrar</Text></TouchableOpacity>
 
             <TouchableOpacity style={[styles.TouchableOpacity, {backgroundColor: "lightgrey", color: "white"}]}
             onPress={() => props.navigation.navigate("Login")}><Text>Cancelar</Text></TouchableOpacity>

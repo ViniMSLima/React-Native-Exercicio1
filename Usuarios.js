@@ -1,18 +1,32 @@
-import { Text, Button, TextInput, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, FlatList } from "react-native";
+import { UtilsContext } from './Context';
+import { useState, useContext } from 'react';
 
 export default function Usuarios(props)
 {
+    const{ utils, setUtils } = useContext(UtilsContext);
+    console.log(utils);
+
     return (
         <View style={styles.container}>
         
             <Text style={styles.bigText}>Usuarios</Text>
-            <View style={{width: "300px", height:"200px", borderRadius: "10px", borderStyle: "dashed", borderWidth: "2px"}}>
-                <Text style={{marginBottom: "5px", marginLeft: "5px", marginTop:"5px"}}>Nome:</Text>
-                <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Idade:</Text>
-                <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Sexo:</Text>
-                <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Receber Notificacao:</Text>
-            </View>
             
+            <FlatList
+                data={utils}
+                renderItem={
+                    ({user}) => 
+                    <View style={{width: "300px", height:"200px", borderRadius: "10px", borderStyle: "dashed", borderWidth: "2px"}}>
+                        <Text style={{marginBottom: "5px", marginLeft: "5px", marginTop:"5px"}}>Nome: {user.nome} </Text>
+                        <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Idade: {user.idade}</Text>
+                        <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Sexo:{user.sexo}</Text>
+                        <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Email: {user.email}</Text>
+                    </View>
+                }
+                keyExtractor={(item) => item}
+                >
+            </FlatList>
+
         </View>
     )
 }

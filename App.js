@@ -1,15 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, TouchableWithoutFeedback, Image, FlatList, SectionList, Switch} from 'react-native';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Login from './Login';
 import Cadastro  from './Cadastro';
 import Usuarios from './Usuarios';
+import { UtilsContext } from './Context'
 
 
 export default function App() {
+  const [ utils, setUtils ] = useState({});
   const Stack = createStackNavigator()
+
   // const [senha, setSenha] = useState("rexono")
   // const [inicio, setInicio] = useState(false)
   // const array = ["numero 1", "numero 2"]
@@ -23,11 +26,13 @@ export default function App() {
 
   return(
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Cadastro" component={Cadastro}/>
-        <Stack.Screen name="Usuarios" component={Usuarios}/>
-      </Stack.Navigator>
+      <UtilsContext.Provider value={{ utils, setUtils }}>
+        <Stack.Navigator>
+          <Stack.Screen name = "Login" options={{ headerShown: false, title: 'Login'}} component = { Login } />
+          <Stack.Screen name = "Cadastro" options={{ headerShown: false}} component = { Cadastro }/>
+          <Stack.Screen name = "Usuarios" component = { Usuarios }/>
+        </Stack.Navigator>
+      </UtilsContext.Provider>
     </NavigationContainer>
   )
     
