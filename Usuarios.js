@@ -1,6 +1,29 @@
-import { Text, View, StyleSheet, FlatList } from "react-native";
+import { Text, View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { UtilsContext } from './Context';
 import { useState, useContext } from 'react';
+
+function deleteUser(nome)
+{
+    
+}
+
+function Box(props)
+{
+    return(
+        <View style={{width: "300px", height:"200px", borderRadius: "10px", borderStyle: "dashed", borderWidth: "2px"}}>
+            <Text style={{marginBottom: "5px", marginLeft: "5px", marginTop:"5px"}}>Nome: {props.nome} </Text>
+            <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Idade: {props.idade}</Text>
+            <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Sexo: {props.sexo}</Text>
+            <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Email: {props.email}</Text>
+
+            <TouchableOpacity style={{width: "50px", backgroundColor: "red",  borderRadius: "30px"}}
+                onPress={() => deleteUser(props.nome)} 
+                >
+                <Text> Delete</Text>
+            </TouchableOpacity>
+        </View>
+    );
+}
 
 export default function Usuarios(props)
 {
@@ -16,12 +39,12 @@ export default function Usuarios(props)
                 data={utils.data}
                 renderItem={
                     ({item}) => 
-                    <View style={{width: "300px", height:"200px", borderRadius: "10px", borderStyle: "dashed", borderWidth: "2px"}}>
-                        <Text style={{marginBottom: "5px", marginLeft: "5px", marginTop:"5px"}}>Nome: {item.nome} </Text>
-                        <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Idade: {item.idade}</Text>
-                        <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Sexo: {item.sexo}</Text>
-                        <Text style={{marginBottom: "5px", marginLeft: "5px"}}>Email: {item.email}</Text>
-                    </View>
+                    <Box 
+                        nome={item.nome}
+                        idade={item.idade}
+                        sexo={item.sexo}
+                        email={item.email}
+                    ></Box>
                 }
                 keyExtractor={(item) => item}
                 >

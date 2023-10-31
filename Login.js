@@ -1,6 +1,7 @@
 import { Text, TextInput, View, StyleSheet, TouchableOpacity, Button } from "react-native";
 import { UtilsContext } from './Context';
 import { useState, useContext } from 'react';
+import LoginInput from './LoginInput';
 
 export default function Login(props)
 {
@@ -12,6 +13,11 @@ export default function Login(props)
     {
         setUtils({...utils, email: email});
         props.navigation.navigate('Cadastro');
+    }
+
+    function goToUsers()
+    {
+        props.navigation.navigate("Usuarios");
     }
 
     function login()
@@ -26,54 +32,7 @@ export default function Login(props)
     
     return (
         <View style={styles.container}>
-        
-            <Text style={styles.bigText}>Login</Text>
-            <Text style={styles.smallText}>User:</Text>
-            <TextInput
-                style={styles.inputs} 
-                onChangeText={text => setEmail(text)} 
-                value={email}
-                placeholder= " email"
-            ></TextInput>
-
-            <Text style={styles.smallText}>Password:</Text>
-            <TextInput  
-                style={styles.inputs}
-                onChangeText={text => setSenha(text)} 
-                secureTextEntry = {true}
-                placeholder= " password"
-            ></TextInput>
-
-            <TouchableOpacity 
-                onPress={() => login()} 
-                style={[
-                    styles.TouchableOpacity, 
-                    {backgroundColor: "white", color: "black"}
-                ]}
-            >
-                <Text>Login</Text>
-            </TouchableOpacity>
-
-
-            <TouchableOpacity 
-                style={[
-                    styles.TouchableOpacity, {backgroundColor: "lightgrey", color: "white"}
-                ]}
-                onPress={() => props.navigation.navigate("Cadastro")}
-            >
-                <Text>Cadastro</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-                onPress={() => props.navigation.navigate("Usuarios")} 
-                style={[
-                    styles.TouchableOpacity, 
-                    {backgroundColor: "white", color: "black"}
-                ]}
-            >
-                <Text>Usuarios</Text>
-            </TouchableOpacity>
-
+            <LoginInput setEmail={setEmail} setSenha={setSenha} goToCadastro={goToCadastro} goToUsers={goToUsers} login={login}/>
         </View>
     )
 
