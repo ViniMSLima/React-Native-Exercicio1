@@ -1,6 +1,7 @@
 import { Text, Button, TextInput, View, StyleSheet, TouchableOpacity, Image, Switch} from "react-native";
 import { useState, useContext } from 'react';
 import { UtilsContext } from './Context';
+import axios from 'axios';
 
 export default function Login(props)
 {
@@ -15,7 +16,7 @@ export default function Login(props)
 
     let arrayUtils = [];
 
-    function cadastro()
+    async function cadastro()
     {
         if(utils.data){
             arrayUtils = [...utils.data];
@@ -23,10 +24,59 @@ export default function Login(props)
         
         arrayUtils.push({nome, idade, sexo, email, senha});
         setUtils({...utils, data:arrayUtils});
+
+        try {
+            const response = await axios.post("http://localhost:8080/user", {
+                "name": nome,
+                "age": idade,
+                "sex": sexo,
+                "email": email,
+                "password": senha
+            });
+            
+            console.log('Resposta da API PostUser:', response);
+        } catch (error) {
+            console.error('Erro ao enviar o user:', error);
+        }
         
         props.navigation.navigate('Usuarios');
     }
+
     
+    async function GetUser()
+    {
+
+        try {
+            const response = await axios.get("http://localhost:8080/user");
+            
+            console.log('Resposta do API GetUser:', response);
+        } catch (error) {
+            console.error('Erro ao pegar o user:', error);
+        }
+    }
+
+    async function PostUser()
+    {
+
+        try {
+            const response = await axios.post("http://localhost:8080/user", {
+                "name": "AAAAAAAAAAAAAAAAAA",
+                "age": 18
+            });
+            
+            console.log('Resposta da API PostUser:', response);
+        } catch (error) {
+            console.error('Erro ao enviar o user:', error);
+        }
+    }
+
+    // async function denis()
+    // {
+    //     await PostUser();
+    //     await GetUser();
+    // }
+
+    // denis();
 
     return (
         <View style={styles.container}>
